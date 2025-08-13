@@ -7,7 +7,7 @@ Automate your job search with a smart, interactive Streamlit app that scrapes li
 ## 👨‍💻 Author
 
 **Vikrant Thenge**  
-Data Analyst | Power BI | Python | Cloud Data Engineering  
+Data Analyst | Power BI | Python | 
 [GitHub Profile](https://github.com/vikrantthenge) • [LinkedIn](https://linkedin.com/in/vikrantthenge)
 
 ---
@@ -33,12 +33,6 @@ Data Analyst | Power BI | Python | Cloud Data Engineering
 - 📄 View job cards with company, role, and link
 - ⚙️ Ready for automation and resume matching
 - 🔐 Secrets managed securely via Streamlit Cloud
-
----
-
-## 📸 UI Preview
-
-*(Add screenshot here if desired — I can help you generate one)*
 
 ---
 

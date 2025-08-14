@@ -8,18 +8,6 @@ api_key = "71a00e1f1emsh5f78d93a2205a33p114d26jsncc6534e3f6b3"
 st.title("🔍 Job Search Automation Bot")
 st.markdown("Search jobs across platforms using keywords and location. Powered by RapidAPI's JSearch.")
 
-# 📄 Download Resume
-import os
-resume_path = os.path.join(os.path.dirname(__file__), "assets", "Vikrant_Thenge_Resume.pdf")
-
-with open(resume_path, "rb") as resume_file:
-    st.download_button(
-        label="📄 Download Resume",
-        data=resume_file,
-        file_name="Vikrant_Thenge_Resume.pdf",
-        mime="application/pdf"
-    )
-
 # 🧠 Input Fields
 keyword = st.text_input("Enter job title or keyword", "Data Analyst")
 location = st.text_input("Enter location", "Mumbai")

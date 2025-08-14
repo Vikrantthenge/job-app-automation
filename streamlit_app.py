@@ -1,51 +1,38 @@
 import streamlit as st
-from jsearch_scraper import fetch_jobs_jsearch
+from pathlib import Path
 
-# ⚠️ Hardcoded API key — for local testing only
-api_key = "71a00e1f1emsh5f78d93a2205a33p114d26jsncc6534e3f6b3"
+# -------------------- CONFIG --------------------
+st.set_page_config(page_title="Vikrant Thenge | Job Automation App", page_icon="📄", layout="centered")
 
-# 🎯 App Title
-st.title("🔍 Job Search Automation Bot")
-st.markdown("Search jobs across platforms using keywords and location. Powered by RapidAPI's JSearch.")
+# -------------------- SIDEBAR --------------------
+st.sidebar.title("Connect with Me")
+st.sidebar.markdown("[🔗 GitHub](https://github.com/vikrantthenge)")
+st.sidebar.markdown("[💼 LinkedIn](https://www.linkedin.com/in/vikrantthenge)")
+st.sidebar.markdown("---")
+st.sidebar.info("Built with ❤️ using Streamlit")
 
-# 📄 Download Resume
-import streamlit as st
-import os
+# -------------------- MAIN CONTENT --------------------
+st.title("📄 Download My Resume")
+st.write("Hi, I'm **Vikrant Thenge** — a Data Analyst & Cloud Engineer blending automation, analytics, and storytelling to drive business impact.")
 
-resume_path = os.path.join("assets", "Vikrant_Thenge_Resume.pdf")
+st.markdown("Click the button below to download my resume:")
 
-if os.path.exists(resume_path):
-    with open(resume_path, "rb") as file:
-        st.download_button(
-            label="📄 Download Resume",
-            data=file.read(),
-            file_name="Vikrant_Thenge_Resume.pdf",
-            mime="application/pdf"
-        )
-else:
-    st.error("Resume file not found. Please check the path or upload it to GitHub.")
+# -------------------- RESUME DOWNLOAD --------------------
+resume_path = Path("assets/resume.pdf")
+with open(resume_path, "rb") as file:
+    resume_bytes = file.read()
 
-    )
+st.download_button(
+    label="📥 Download Resume",
+    data=resume_bytes,
+    file_name="Vikrant_Thenge_Resume.pdf",
+    mime="application/pdf"
+)
 
-# 🧠 Input Fields
-keyword = st.text_input("Enter job title or keyword", "Data Analyst")
-location = st.text_input("Enter location", "Mumbai")
+# -------------------- BALLOONS --------------------
+st.success("Thanks for downloading! 🎉")
+st.balloons()
 
-# 🚀 Search Button
-if st.button("Search Jobs"):
-    if keyword and location:
-        with st.spinner("Fetching jobs..."):
-            jobs = fetch_jobs_jsearch(keyword, location, api_key)
-
-        if jobs:
-            st.success(f"Found {len(jobs)} jobs for '{keyword}' in '{location}'")
-            for job in jobs:
-                st.markdown("----")
-                st.subheader(job["title"])
-                st.write(f"**Company:** {job['company']}")
-                st.write(f"**Location:** {job['location']}")
-                st.markdown(f"[📝 Apply Here]({job['link']})", unsafe_allow_html=True)
-        else:
-            st.warning("No jobs found. Try different keywords or locations.")
-    else:
-        st.error("Please enter both keyword and location.")
+# -------------------- FOOTER --------------------
+st.markdown("---")
+st.caption("© 2025 Vikrant Thenge. All rights reserved.")

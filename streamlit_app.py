@@ -9,15 +9,22 @@ st.title("🔍 Job Search Automation Bot")
 st.markdown("Search jobs across platforms using keywords and location. Powered by RapidAPI's JSearch.")
 
 # 📄 Download Resume
+import streamlit as st
 import os
-resume_path = os.path.join(os.path.dirname(__file__), "assets", "Vikrant_Thenge_Resume.pdf")
 
-with open(resume_path, "rb") as resume_file:
-    st.download_button(
-        label="📄 Download Resume",
-        data=resume_file,
-        file_name="Vikrant_Thenge_Resume.pdf",
-        mime="application/pdf"
+resume_path = os.path.join("assets", "Vikrant_Thenge_Resume.pdf")
+
+if os.path.exists(resume_path):
+    with open(resume_path, "rb") as file:
+        st.download_button(
+            label="📄 Download Resume",
+            data=file.read(),
+            file_name="Vikrant_Thenge_Resume.pdf",
+            mime="application/pdf"
+        )
+else:
+    st.error("Resume file not found. Please check the path or upload it to GitHub.")
+
     )
 
 # 🧠 Input Fields

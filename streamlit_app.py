@@ -1,8 +1,10 @@
 import streamlit as st
+from jsearch_scraper import fetch_jobs_jsearch
 from pathlib import Path
+import os
 
 # -------------------- CONFIG --------------------
-st.set_page_config(page_title="Vikrant Thenge | Job Automation App", page_icon="📄", layout="centered")
+st.set_page_config(page_title="Job Search Automation | Vikrant Thenge", page_icon="🔍", layout="centered")
 
 # -------------------- SIDEBAR --------------------
 st.sidebar.title("Connect with Me")
@@ -11,27 +13,53 @@ st.sidebar.markdown("[💼 LinkedIn](https://www.linkedin.com/in/vikrantthenge)"
 st.sidebar.markdown("---")
 st.sidebar.info("Built with ❤️ using Streamlit")
 
-# -------------------- MAIN CONTENT --------------------
-st.title("📄 Download My Resume")
-st.write("Hi, I'm **Vikrant Thenge** — a Data Analyst & Cloud Engineer blending automation, analytics, and storytelling to drive business impact.")
-
-st.markdown("Click the button below to download my resume:")
+# -------------------- TITLE --------------------
+st.title("🔍 Job Search Automation Bot")
+st.markdown("Search jobs across platforms using keywords and location. Powered by RapidAPI's JSearch.")
 
 # -------------------- RESUME DOWNLOAD --------------------
-resume_path = Path("assets/resume.pdf")
-with open(resume_path, "rb") as file:
-    resume_bytes = file.read()
+st.markdown("### 📄 Download My Resume")
+resume_path = Path("assets/Vikrant_Thenge_Resume.pdf")
+if resume_path.exists():
+    with open(resume_path, "rb") as file:
+        resume_bytes = file.read()
+        if st.download_button(
+            label="📥 Download Resume",
+            data=resume_bytes,
+            file_name="Vikrant_Thenge_Resume.pdf",
+            mime="application/pdf"
+        ):
+            st.success("✅ Resume downloaded successfully!")
+            st.balloons()
+else:
+    st.error("Resume file not found. Please upload it to the assets folder.")
 
-st.download_button(
-    label="📥 Download Resume",
-    data=resume_bytes,
-    file_name="Vikrant_Thenge_Resume.pdf",
-    mime="application/pdf"
-)
+# -------------------- JOB SEARCH --------------------
+st.markdown("---")
+st.header("🔎 Search for Jobs")
 
-# -------------------- BALLOONS --------------------
-st.success("Thanks for downloading! 🎉")
-st.balloons()
+keyword = st.text_input("Enter job title or keyword", "Data Analyst")
+location = st.text_input("Enter location", "Mumbai")
+
+api_key = "your_rapidapi_key_here"  # Replace with your actual RapidAPI key
+
+if st.button("Search Jobs"):
+    if keyword and location:
+        with st.spinner("Fetching jobs..."):
+            jobs = fetch_jobs_jsearch(keyword, location, api_key)
+
+        if jobs:
+            st.success(f"Found {len(jobs)} jobs for '{keyword}' in '{location}'")
+            for job in jobs:
+                st.markdown("----")
+                st.subheader(job.get("title", "No Title"))
+                st.write(f"**Company:** {job.get('company_name', 'Unknown')}")
+                st.write(f"**Location:** {job.get('location', 'Unknown')}")
+                st.markdown(f"[📝 Apply Here]({job.get('job_apply_link', job.get('job_google_link', '#'))})", unsafe_allow_html=True)
+        else:
+            st.warning("No jobs found. Try different keywords or locations.")
+    else:
+        st.error("Please enter both keyword and location.")
 
 # -------------------- FOOTER --------------------
 st.markdown("---")

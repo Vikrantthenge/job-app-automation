@@ -8,11 +8,11 @@ st.set_page_config(page_title="Job Search Automation | Vikrant Thenge", page_ico
 
 # -------------------- SIDEBAR --------------------
 st.sidebar.title("Vikrant Thenge")
-st.sidebar.title("Connect with Me")
+st.sidebar.markdown("Connect with Me")
 st.sidebar.markdown("[🔗 GitHub](https://github.com/vikrantthenge)")
 st.sidebar.markdown("[💼 LinkedIn](https://www.linkedin.com/in/vthenge/)")
 st.sidebar.markdown("---")
-st.sidebar.info("Built with ❤️ using Streamlit")
+st.sidebar.info("Built by Vikrant with ❤️ using Streamlit")
 
 # -------------------- TITLE --------------------
 st.title("🔍 Job Search Automation Bot")

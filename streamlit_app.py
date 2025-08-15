@@ -7,6 +7,7 @@ import os
 st.set_page_config(page_title="Job Search Automation | Vikrant Thenge", page_icon="🔍", layout="centered")
 
 # -------------------- SIDEBAR --------------------
+st.sidebar.title("Vikrant Thenge")
 st.sidebar.title("Connect with Me")
 st.sidebar.markdown("[🔗 GitHub](https://github.com/vikrantthenge)")
 st.sidebar.markdown("[💼 LinkedIn](https://www.linkedin.com/in/vthenge/)")
